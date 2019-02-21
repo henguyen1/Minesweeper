@@ -30,7 +30,13 @@ void setup ()
 }
 public void setBombs()
 {
-    //your code
+    int rRow = (int)(Math.random()*21);
+    int rCol = (int)(Math.random()*21);
+    if(!bombs.contains(buttons[rRow][rCol]))
+    {
+        bombs.add(buttons[rRow][rCol]);
+        System.out.println(rRow + ", " + rCol);
+    }
 }
 
 public void draw ()
@@ -92,8 +98,11 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
+        else if( clicked && bombs.contains(this) ) 
+        {
+            fill(255,0,0);
+        }
+        
         else if(clicked)
             fill( 200 );
         else 
