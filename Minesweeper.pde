@@ -23,15 +23,18 @@ void setup ()
             buttons[i][j] = new MSButton(i,j);
         }
     }
+    for(int a = 0; a < 20; a++)
+    {
+        setBombs();
+    }
     
     
     
-    setBombs();
 }
 public void setBombs()
 {
-    int rRow = (int)(Math.random()*21);
-    int rCol = (int)(Math.random()*21);
+    int rRow = (int)(Math.random()*20);
+    int rCol = (int)(Math.random()*20);
     if(!bombs.contains(buttons[rRow][rCol]))
     {
         bombs.add(buttons[rRow][rCol]);
@@ -118,13 +121,16 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        //your code here
+        if(r <= NUM_ROWS && r >= 0 && c <= NUM_ROWS && c >= 0)
+        {
+            return true;
+        }
         return false;
     }
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        //your code here
+        if()
         return numBombs;
     }
 }
