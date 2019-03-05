@@ -23,7 +23,7 @@ void setup ()
             buttons[i][j] = new MSButton(i,j);
         }
     }
-    for(int a = 0; a < ((NUM_ROWS*NUM_COLS)/4); a++)
+    for(int a = 0; a < ((NUM_ROWS*NUM_COLS)/5); a++)
     {
         setBombs();
     }
@@ -114,13 +114,13 @@ public class MSButton
             }
             else if((countBombs(r,c))>0)
             {
-                setLabel(""+countBombs());
+                setLabel(""+countBombs(r,c));
             }
             else
             {
-                for(int r = row-1; r <= row+1;r++)
+                for(int arow = r-1; arow <= r+1;r++)
                 {
-                    for(int c = col-1; c <= col+1;c++)
+                    for(int acol = c-1; acol <= c+1;c++)
                     {
                         mousePressed();
                     }
@@ -162,11 +162,11 @@ public class MSButton
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        for(int r = row-1; r <= row+1;r++)
+        for(int trow = r-1; trow <= r+1;trow++)
         {
-            for(int c = col-1; c <= col+1;c++)
+            for(int tcol = c-1; tcol <= c+1;tcol++)
             {
-                if(isValid(row,col)==true&&bombs.contains(buttons[row][col]))
+                if(isValid(trow,tcol)==true&&bombs.contains(buttons[trow][tcol]))
                 {
                     numBombs++;
                 }
