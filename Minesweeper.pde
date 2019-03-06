@@ -96,19 +96,20 @@ public class MSButton
         clicked = true;
         if(mouseButton==RIGHT)
         {
-            if(marked!=true)
-            {
-                marked = true;
-            }
-            else
+            if(marked==true)
             {
                 marked = false;
-            }
-            if(marked==false)
-            {
                 clicked = false;
             }
-            else if(bombs.contains(this))
+            else if(marked == false)
+            {
+                marked = true;
+                clicked = false;
+            }
+        }
+        if(mouseButton==LEFT)
+        {
+            if(bombs.contains(this))
             {
                 displayLosingMessage();
             }
@@ -116,7 +117,7 @@ public class MSButton
             {
                 setLabel(""+countBombs(r,c));
             }
-            else
+            else//fix
             {
                 for(int arow = r-1; arow <= r+1;r++)
                 {
@@ -127,6 +128,8 @@ public class MSButton
                 }
             }
         }
+        
+         
     }
 
     public void draw () 
