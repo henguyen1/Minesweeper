@@ -99,7 +99,7 @@ public class MSButton
             if(marked==true)
             {
                 marked = false;
-                clicked = false;
+                //clicked = false;
             }
             else if(marked == false)
             {
@@ -117,19 +117,20 @@ public class MSButton
             {
                 setLabel(""+countBombs(r,c));
             }
-            else//fix
+            else
             {
-                for(int arow = r-1; arow <= r+1;r++)
+                for(int row = r-1; row <= r+1;row++)
                 {
-                    for(int acol = c-1; acol <= c+1;c++)
+                    for(int col = c-1; col <= c+1;col++)
                     {
-                        mousePressed();
+                        if(isValid(row,col) && countBombs(row,col)==0)
+                        {
+                            buttons[row][col].mousePressed();
+                        }
                     }
                 }
             }
-        }
-        
-         
+        }     
     }
 
     public void draw () 
