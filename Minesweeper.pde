@@ -25,7 +25,7 @@ void setup ()
     }
     for(int a = 0; a < ((NUM_ROWS*NUM_COLS)/5); a++)
     {
-        setBombs();
+        //setBombs();
     }
     
     
@@ -123,7 +123,7 @@ public class MSButton
                 {
                     for(int col = c-1; col <= c+1;col++)
                     {
-                        if(isValid(row,col) && countBombs(row,col)==0)
+                        if(isValid(row,col) && marked==false)
                         {
                             buttons[row][col].mousePressed();
                         }
