@@ -99,7 +99,7 @@ public class MSButton
             if(marked==true)
             {
                 marked = false;
-                //clicked = false;
+                clicked = false;
             }
             else if(marked == false)
             {
@@ -123,7 +123,7 @@ public class MSButton
                 {
                     for(int col = c-1; col <= c+1;col++)
                     {
-                        if(isValid(row,col) && marked==false)
+                        if(isValid(row,col) && marked==false && countBombs(row,col)>=0)
                         {
                             buttons[row][col].mousePressed();
                         }
@@ -157,7 +157,7 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        if(r <= NUM_ROWS && r >= 0 && c <= NUM_ROWS && c >= 0)
+        if(r < NUM_ROWS && r >= 0 && c < NUM_ROWS && c >= 0)
         {
             return true;
         }
