@@ -5,8 +5,6 @@ public final static int NUM_ROWS = 20;
 public final static int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton>(); //ArrayList of just the minesweeper buttons that are mined
-
-
 void setup ()
 {
     size(400, 400);
@@ -14,7 +12,6 @@ void setup ()
     
     // make the manager
     Interactive.make( this );
-    
     buttons = new MSButton[NUM_ROWS][NUM_COLS];
     for(int i = 0; i < NUM_ROWS; i++)
     {
@@ -25,23 +22,19 @@ void setup ()
     }
     for(int a = 0; a < ((NUM_ROWS*NUM_COLS)/5); a++)
     {
-        //setBombs();
-    }
-    
-    
-    
+        setBombs();
+    } 
+
 }
-public void setBombs()
+public void setBombs() // maybe use this function to help think of a way to do isWon()
 {
     int rRow = (int)(Math.random()*20);
     int rCol = (int)(Math.random()*20);
     if(!bombs.contains(buttons[rRow][rCol]))
     {
         bombs.add(buttons[rRow][rCol]);
-        System.out.println(rRow + ", " + rCol);
     }
 }
-
 public void draw ()
 {
     background( 0 );
@@ -50,7 +43,13 @@ public void draw ()
 }
 public boolean isWon()
 {
-    //your code here
+    for(int a = 0; a < bombs.size();a++)
+    {
+        if(bombs.get(a).isClicked()==false  )
+        {
+            return true;
+        }
+    }
     return false;
 }
 public void displayLosingMessage()
@@ -61,7 +60,6 @@ public void displayWinningMessage()
 {
     //your code here
 }
-
 public class MSButton
 {
     private int r, c;
@@ -123,7 +121,7 @@ public class MSButton
                 {
                     for(int col = c-1; col <= c+1;col++)
                     {
-                        if(isValid(row,col) && marked==false && countBombs(row,col)>=0)
+                        if(isValid(row,col) && buttons[row][col].isClicked() == false)
                         {
                             buttons[row][col].mousePressed();
                         }
