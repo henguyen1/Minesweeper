@@ -1,6 +1,7 @@
 
 
 import de.bezier.guido.*;
+int bombAmount = 0;
 public final static int NUM_ROWS = 20;
 public final static int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
@@ -20,13 +21,14 @@ void setup ()
             buttons[i][j] = new MSButton(i,j);
         }
     }
-    for(int a = 0; a < ((NUM_ROWS*NUM_COLS)/5); a++)
+    for(int a = 0; a < ((NUM_ROWS*NUM_COLS)/40); a++)
     {
         setBombs();
+        bombAmount++;
     } 
 
 }
-public void setBombs() // maybe use this function to help think of a way to do isWon()
+public void setBombs() 
 {
     int rRow = (int)(Math.random()*20);
     int rCol = (int)(Math.random()*20);
@@ -43,22 +45,42 @@ public void draw ()
 }
 public boolean isWon()
 {
-    for(int a = 0; a < bombs.size();a++)
+    int countmarked = 0;
+    int countclicks = 0;
+    for(int rrow = 0; rrow < NUM_ROWS; rrow++)
     {
-        if(bombs.get(a).isClicked()==false  )
+        for(int ccol = 0; ccol < NUM_COLS; ccol++)
         {
-            return true;
+            if(buttons[rrow][ccol].isMarked()){countmarked++;}
+            else if(buttons[rrow][ccol].isClicked()){countclicks++;}
         }
+    }
+    if(countmarked == bombAmount && (countmarked + countclicks)==NUM_ROWS*NUM_COLS && bombAmount == bombs.size())
+    {
+        return true;
     }
     return false;
 }
 public void displayLosingMessage()
 {
-    //your code here
+    buttons[10][1].setLabel("Y");
+    buttons[10][2].setLabel("o");
+    buttons[10][3].setLabel("u");
+    buttons[10][5].setLabel("L");
+    buttons[10][6].setLabel("o");
+    buttons[10][7].setLabel("s");
+    buttons[10][8].setLabel("e");
+    buttons[10][9].setLabel("!");
 }
 public void displayWinningMessage()
 {
-    //your code here
+    buttons[10][1].setLabel("Y");
+    buttons[10][2].setLabel("o");
+    buttons[10][3].setLabel("u");
+    buttons[10][5].setLabel("W");
+    buttons[10][6].setLabel("i");
+    buttons[10][7].setLabel("n");
+    buttons[10][8].setLabel("!");
 }
 public class MSButton
 {
@@ -134,18 +156,18 @@ public class MSButton
     public void draw () 
     {    
         if (marked)
-            fill(0);
+            fill(0,255,0);
         else if( clicked && bombs.contains(this) ) 
         {
             fill(255,0,0);
         }
         
         else if(clicked)
-            fill( 200 );
+            fill(21, 97, 219);
         else 
-            fill( 100 );
+            fill( 50 );
 
-        rect(x, y, width, height);
+        rect(x, y, width, height,20);
         fill(0);
         text(label,x+width/2,y+height/2);
     }
